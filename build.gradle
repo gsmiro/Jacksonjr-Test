@@ -1,19 +1,32 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'java'
+apply plugin: 'eclipse'
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.11.+'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+sourceCompatibility = 1.7
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
     }
 }
 
-allprojects {
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile 'com.fasterxml.jackson.jr:jackson-jr-objects:2.4.0'
+   	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
     repositories {
-        mavenCentral()
+       flatDir {
+           dirs 'repos'
+       }
     }
 }
